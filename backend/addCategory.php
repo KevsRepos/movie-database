@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../ini/lib/mainFunctions.php';
+require_once __DIR__.'/ini/lib/mainFunctions.php';
 
 if(isLoggedIn()) {
   endScript(false, 'Hierfür musst du eingeloggt sein.');
