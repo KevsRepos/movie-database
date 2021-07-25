@@ -1,60 +1,64 @@
 import { IonButton, IonHeader, IonIcon, IonSearchbar, IonTitle, IonToolbar } from "@ionic/react"
 import { personOutline, searchOutline } from 'ionicons/icons';
-import { useState } from "react";
-// import { useHistory } from "react-router";
+import { useRef, useState } from "react";
 import { fetchAPI } from "../functions/fetchAPI";
 import './header.css';
 
 const Header = () => {
+  const [movieData, setMovieData] = useState(false);
+
   return(
+    <>
     <IonHeader>
       <IonToolbar>
         <div className="headingFlex">
           <IonTitle>Filmdatenbank</IonTitle>
           <div className="headerBtns">
-            <SearchBtn />
+            <SearchBtn movieData={movieData} setMovieData={setMovieData} />
             <IonButton><IonIcon icon={personOutline} /></IonButton>
           </div>
         </div>
       </IonToolbar>
     </IonHeader>
+    {
+      movieData ? <SuggestionsCont movies={movieData} setMovies={setMovieData} /> : null
+    }
+    </>
   )
 }
 
 export default Header;
 
-const SearchBtn = () => {
-  // const history = useHistory();
+const SearchBtn = props => {
   const [toggleSearchbar, setToggleSearchbar] = useState(false);
-  const [movieData, setMovieData] = useState(false);
   const [search, setSearch] = useState("");
+  const searchInput = useRef(null);
 
   const openSeachbar = () => {
     toggleSearchbar ? 
     setToggleSearchbar(false) :
     setToggleSearchbar(true);
-
-    // if(toggleSearchbar && search !== "") {
-    //   history.push(`/Search/${search}`);
-    // }
+    
+    setTimeout(() => {
+      !toggleSearchbar && searchInput.current.setFocus();
+    }, 0);
   }
 
   const searchMovies = e => {
     setSearch(e.target.value);
 
     if(e.target.value === "") {
-      setMovieData(false);
+      props.setMovieData(false);
       return;
     }
 
     fetchAPI('movies/search', {value: e.target.value})
-    .then(data => {
-      setMovieData(data);
+    .ok(data => {
+      props.setMovieData(data);
     })
-    .catch(err => {
-      setMovieData(false);
-      console.log("Neuer Error: " + err)
-    });
+    .emptyResult(() => {
+      props.setMovieData(false);
+    })
   }
 
   return(
@@ -62,11 +66,8 @@ const SearchBtn = () => {
     {
       toggleSearchbar ?
       <div className="searchbar">
-        <IonSearchbar placeholder="z.B. V wie Vendetta..." className="searchInput" value={search} onInput={e => searchMovies(e)} animated="true"></IonSearchbar>
+        <IonSearchbar ref={searchInput} placeholder="z.B. V wie Vendetta..." className="searchInput" value={search} onInput={e => searchMovies(e)} animated="true"></IonSearchbar>
       </div> : null
-    }
-    {
-      movieData ? <SuggestionsCont movies={movieData} setMovies={setMovieData} /> : null
     }
     <IonButton className="headerBtn" onClick={openSeachbar}>
       <IonIcon icon={searchOutline} />
@@ -76,12 +77,16 @@ const SearchBtn = () => {
 }
 
 const SuggestionsCont = props => {
-  console.log('suggestions')
+  const searchbarStyles = useRef(document.getElementsByClassName('searchbar')[0].getBoundingClientRect());
+
   return(
-    <div className="suggestions">
+    <div style={{
+        left: searchbarStyles.current.left, 
+        width: searchbarStyles.current.width
+      }} className="suggestions ion-padding">
     {
       props.movies.map(data => {
-        return <span key={data.movieId}>{data.name}</span>
+        return <a href={`/`} className="ion-padding suggestionLink" key={data.movieId}>{data.name}</a>
       })
     }
     </div>
