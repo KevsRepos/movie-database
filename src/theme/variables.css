@@ -5,6 +5,8 @@ http://ionicframework.com/docs/theming/ */
 :root {
   /* Own variables */
   --borderRadius: 2px;
+  --margin: 10px;
+  --boxShadow: 0px 3px 3px #DFDFDF;
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;

@@ -1,6 +1,7 @@
 import { IonButton, IonHeader, IonIcon, IonSearchbar, IonTitle, IonToolbar } from "@ionic/react"
 import { personOutline, searchOutline } from 'ionicons/icons';
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { fetchAPI } from "../functions/fetchAPI";
 import './header.css';
 
@@ -15,7 +16,7 @@ const Header = () => {
           <IonTitle>Filmdatenbank</IonTitle>
           <div className="headerBtns">
             <SearchBtn movieData={movieData} setMovieData={setMovieData} />
-            <IonButton><IonIcon icon={personOutline} /></IonButton>
+            <Link to="../Login/"><IonButton><IonIcon color="light" icon={personOutline} /></IonButton></Link>
           </div>
         </div>
       </IonToolbar>

@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 
-import { IonApp } from '@ionic/react';
+import { IonApp, IonContent, IonPage } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
 /* Core CSS required for Ionic components to work properly */
@@ -27,6 +27,7 @@ import './theme/global.css';
 import Header from './components/header';
 import React from 'react';
 import { useCookies } from 'react-cookie';
+import Router from './router';
 
 export const t = React.createContext(null);
 
@@ -35,13 +36,16 @@ const App = () => {
 
   return(
     <IonApp>
-      <t.Provider value={{
-        authToken: cookies.authToken,
-        setToken: (newToken) => setCookie('authToken', newToken),
-        removeToken: () =>  removeCookie('authToken')
-      }}>
-      <Header />
-      </t.Provider>
+      <IonContent>
+        <t.Provider value={{
+          authToken: cookies.authToken,
+          setToken: (newToken) => setCookie('authToken', newToken),
+          removeToken: () =>  removeCookie('authToken')
+        }}>
+        <Header />
+        <Router />
+        </t.Provider>
+      </IonContent>
     </IonApp>
   )
 };

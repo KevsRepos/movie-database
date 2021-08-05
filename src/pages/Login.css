@@ -1,0 +1,26 @@
+main {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  width: 50vw;
+  transform: translate(-50%, -50%);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--boxShadow);
+}
+.switchSegment {
+  background-color: var(--ion-color-light);
+  box-shadow: var(--boxShadow);
+}
+.catchText {
+  width: 70%;
+  margin: 5px;
+}
+.formGroup {
+  margin: 20px;
+}
+ion-item {
+  margin: var(--margin) 0px;
+}
+.errText {
+  margin: 8px 0px;
+}
