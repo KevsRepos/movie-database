@@ -17,13 +17,13 @@ const Router = () => {
       {
         !authToken ? <Route exact path="/Login/" component={LoginPage} /> : <Redirect to="/" />
       }
-      <Route exact path="/Search/:searchValue/" component={SearchResults} />
+      {/* <Route exact path="/Search/:searchValue/" component={SearchResults} />
       <Route exact path="/Movie/:name/" component={MovieCont} />
       <Route exact path={["/Profile/", "/Profile/:userId/"]} component={Profile} />
       <Route path={["/Favorites/", "/Favorites/:userId/"]} component={Favorites} />
       <Route exact path="/Categories/" component={Categories} />
       <Route exact path="/Categories/:categoryName/" component={Category} />
-      <Route path="/Add/" component={ token ? AddMovie : LoginPage } />
+      <Route path="/Add/" component={ token ? AddMovie : LoginPage } /> */}
     </IonRouterOutlet>
   )
 }
