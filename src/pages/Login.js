@@ -1,8 +1,9 @@
 import { IonButton, IonInput, IonItem, IonItemGroup, IonLabel, IonPage, IonSegment, IonSegmentButton } from "@ionic/react"
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import ErrMsg from "../components/ErrMsg/ErrMsg";
 import { fetchAPI } from "../functions/fetchAPI";
+import {t} from '../index';
 import './Login.css';
 
 export const LoginPage = () => {
@@ -24,6 +25,7 @@ export const LoginPage = () => {
 }
 
 const LoginView = () => {
+  const {setToken} = useContext(t)
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -37,6 +39,7 @@ const LoginView = () => {
       password: password
     })
     .ok(() => {
+      setToken(document.cookie.authToken);
       history.push('/');
     })
     .emptyResult(() => {
