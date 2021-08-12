@@ -1,9 +1,9 @@
 import { IonButton, IonHeader, IonIcon, IonSearchbar, IonTitle, IonToolbar } from "@ionic/react"
 import { personOutline, searchOutline } from 'ionicons/icons';
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 import { fetchAPI } from "../functions/fetchAPI";
-import {t} from '../index';
 import './header.css';
 
 const Header = () => {
@@ -36,7 +36,7 @@ const Header = () => {
 export default Header;
 
 const ProfileButton = props => {
-  const {authToken} = useContext(t);
+  const [cookies, setCookie, removeCookie] = useCookies(['authToken']);
   const menuRef = useRef();
 
   useEffect(() => {
@@ -53,8 +53,8 @@ const ProfileButton = props => {
 
   return(
     <>
-    <Link to={!authToken ? "./Login" : ""}>
-      <IonButton onClick={authToken ? () => props.setOpenProfileMenu(!props.openProfileMenu) : null}>
+    <Link to={!cookies.authToken ? "./Login" : ""}>
+      <IonButton onClick={cookies.authToken ? () => props.setOpenProfileMenu(!props.openProfileMenu) : null}>
         <IonIcon color="light" icon={personOutline} />
       </IonButton>
     </Link>
@@ -73,10 +73,10 @@ const ProfileMenu = props => {
 }
 
 const LogOutButton = () => {
-  const {removeToken} = useContext(t);
+  const [cookies, setCookie, removeCookie] = useCookies(['authToken']);
 
   return (
-    <IonButton onClick={removeToken}>
+    <IonButton onClick={() => removeCookie('authToken')}>
       Ausloggen
     </IonButton>
   )

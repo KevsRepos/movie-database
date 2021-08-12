@@ -26,25 +26,14 @@ import './theme/global.css';
 /* imports */
 import Header from './components/header';
 import React from 'react';
-import { useCookies } from 'react-cookie';
 import Router from './router';
 
-export const t = React.createContext(null);
-
 const App = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(['authToken']);
-
   return(
     <IonApp>
       <IonContent>
-        <t.Provider value={{
-          authToken: cookies.authToken,
-          setToken: (newToken) => setCookie('authToken', newToken),
-          removeToken: () =>  removeCookie('authToken')
-        }}>
         <Header />
         <Router />
-        </t.Provider>
       </IonContent>
     </IonApp>
   )

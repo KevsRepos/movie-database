@@ -1,10 +1,11 @@
 import { IonButton, IonInput, IonItem, IonItemGroup, IonLabel, IonPage, IonSegment, IonSegmentButton } from "@ionic/react"
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { useCookies } from 'react-cookie';
 import ErrMsg from "../components/ErrMsg/ErrMsg";
 import { fetchAPI } from "../functions/fetchAPI";
-import {t} from '../index';
 import './Login.css';
+import { getCookie } from "../functions/functions";
 
 export const LoginPage = () => {
   const [login, setLogin] = useState(true);
@@ -25,7 +26,7 @@ export const LoginPage = () => {
 }
 
 const LoginView = () => {
-  const {setToken} = useContext(t)
+  const [cookies, setCookie, removeCookie] = useCookies(['authToken']);
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,13 +34,13 @@ const LoginView = () => {
 
   const submitLogin = e => {
     e.preventDefault();
-    console.log('submit')
+
     fetchAPI('account/login', {
       email: email,
       password: password
     })
     .ok(() => {
-      setToken(document.cookie.authToken);
+      setCookie('authToken', getCookie('authToken'))
       history.push('/');
     })
     .emptyResult(() => {
@@ -79,6 +80,7 @@ const LoginView = () => {
 }
 
 const RegisterView = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(['authToken']);
   const history = useHistory();
   const [errMsg, setErrMsg] = useState();
   const [name, setName] = useState('');
@@ -131,6 +133,7 @@ const RegisterView = () => {
       password
     })
     .ok(() => {
+      setCookie('authToken', getCookie('authToken'))
       history.push('/');
     })
     .emailAssigned(() => {
