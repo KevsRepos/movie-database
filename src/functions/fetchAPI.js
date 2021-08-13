@@ -1,3 +1,5 @@
+import { getCookie } from "./functions";
+
 export const fetchAPI = (url, data) => {
   let httpAnswer = {
     httpStatus: null,
@@ -79,14 +81,14 @@ export const fetchAPI = (url, data) => {
     return httpAnswer;
   }
 
+  console.log(getCookie('authToken'));
   fetch("http://localhost:3005/api/" + url, {
-    headers: {
-      "Authorization": "Basic Og==",
-      "Content-Type": "application/json" 
-    },
-    method: 'POST',
-    body: JSON.stringify(data),
-    credentials: 'include'
+    headers: { 
+      'Content-Type': 'application/json'
+    }, 
+    credentials: 'include', 
+    method: 'POST', 
+    body: JSON.stringify(data)
   }).then((res) => {
     console.log(res);
     httpAnswer.giveRes(res)

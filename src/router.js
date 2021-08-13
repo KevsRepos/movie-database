@@ -2,13 +2,12 @@ import { IonRouterOutlet } from "@ionic/react";
 import Home from "./pages/Home";
 import { LoginPage } from "./pages/Login";
 import { useCookies } from 'react-cookie';
-import { useContext } from "react";
 import { Route } from "react-router";
 import { Redirect } from "react-router";
 import Profile from "./pages/Profile/Profile";
 
 const Router = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(['authToken']);
+  const [cookies] = useCookies(['authToken']);
   
   return(
     <IonRouterOutlet>
