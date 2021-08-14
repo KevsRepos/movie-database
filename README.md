@@ -11,8 +11,11 @@ A React + Ionic project! This Webapp is planned as a reference, but will actuall
 **run in a node enviroment:**
 
 > npm run start
+
 to start the development server
+
 > npm run build
+
 to build a deployment-ready Webapp.
 
 ## Features
