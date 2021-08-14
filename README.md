@@ -1,10 +1,10 @@
 # movie-database
-a movie database used as fictional reference
+a movie database used as a fictional reference
 
 Have a look at the very confusing backend: https://github.com/KevsRepos/movie-database-backend
 
 ## Overview ##
-A React + Ionic project! This Webapp is planned as a reference, but will actually be available, maybe even in the playstore. You will find it on https://baerchen.design
+A React + Ionic project! This Webapp is planned as a reference, but will actually be available, maybe even in the playstore.
 
 ## Commands
 
@@ -19,7 +19,7 @@ to start the development server
 to build a deployment-ready Webapp.
 
 ## Features
-- Register and login
+- Register and login 
 - Accounts with profile pages
 - Add/edit/delete a Movie
 - Favorize Movies you like the most
