@@ -5,6 +5,7 @@ import { useCookies } from 'react-cookie';
 import { Route } from "react-router";
 import { Redirect } from "react-router";
 import Profile from "./pages/Profile/Profile";
+import MovieCont from "./pages/Movie/Movie";
 
 const Router = () => {
   const [cookies] = useCookies(['authToken']);
@@ -13,8 +14,8 @@ const Router = () => {
     <IonRouterOutlet>
       <Route exact path="/" component={Home} />
       { !cookies.authToken ? <Route exact path="/Login/" component={LoginPage} /> : <Redirect to="/" /> }
-      {/* <Route exact path="/Search/:searchValue/" component={SearchResults} />
-      <Route exact path="/Movie/:name/" component={MovieCont} />*/}
+      {/* <Route exact path="/Search/:searchValue/" component={SearchResults} />*/}
+      <Route exact path="/Movie/:name/" component={MovieCont} />
       { cookies.authToken ? <Route exact path={["/Profile/", "/Profile/:userId/"]} component={Profile} /> : <Redirect to="/Login/" /> }
       {/*<Route path={["/Favorites/", "/Favorites/:userId/"]} component={Favorites} />
       <Route exact path="/Categories/" component={Categories} />

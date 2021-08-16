@@ -1,7 +1,7 @@
 import { IonButton, IonHeader, IonIcon, IonSearchbar, IonTitle, IonToolbar } from "@ionic/react"
 import { personOutline, searchOutline } from 'ionicons/icons';
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import { fetchAPI } from "../functions/fetchAPI";
 import './header.css';
@@ -9,6 +9,12 @@ import './header.css';
 const Header = () => {
   const [movieData, setMovieData] = useState(false);
   const [openProfileMenu, setOpenProfileMenu] = useState(false);
+  let location = useLocation();
+
+  useEffect(() => {
+    setMovieData(false);
+    setOpenProfileMenu(false);
+  }, [location]);
 
   return(
     <>
@@ -139,7 +145,7 @@ const SuggestionsCont = props => {
       }} className="suggestions ion-padding">
     {
       props.movies.map(data => {
-        return <a href={`/`} className="ion-padding suggestionLink" key={data.movieId}>{data.name}</a>
+        return <Link to={`/Movie/${data.name}/`} className="ion-padding suggestionLink" key={data.movieId}>{data.name}</Link>
       })
     }
     </div>
