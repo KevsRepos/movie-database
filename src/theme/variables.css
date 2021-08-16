@@ -1,12 +1,28 @@
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ */
 
+/* roboto-condensed-700 - latin */
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../assets/fonts/roboto-condensed-v19-latin-700.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('../assets/fonts/roboto-condensed-v19-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../assets/fonts/roboto-condensed-v19-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../assets/fonts/roboto-condensed-v19-latin-700.woff') format('woff'), /* Modern Browsers */
+       url('../assets/fonts/roboto-condensed-v19-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../assets/fonts/roboto-condensed-v19-latin-700.svg#RobotoCondensed') format('svg'); /* Legacy iOS */
+}
+
 /** Ionic CSS Variables **/
 :root {
   /* Own variables */
   --borderRadius: 2px;
   --margin: 10px;
   --boxShadow: 0px 3px 3px #DFDFDF;
+  /* Font */
+  --ion-font-family: 'Roboto Condensed';
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
