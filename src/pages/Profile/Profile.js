@@ -7,12 +7,14 @@ const Profile = () => {
   const history = useHistory();
   const {userId} = useParams();
   const [errMsg, setErrMsg] = useState();
-  const [profileData, setProfileData] = useState();
+  const [profileData, setProfileData] = useState({});
 
   useEffect(() => {
     if(!userId) {
       fetchAPI('account/read')
-      .ok(data => setProfileData(data))
+      .ok(data => {
+        setProfileData(data);
+      })
       .badlyAuthenticated(() => {
         history.push('/Login/');
       })
@@ -26,7 +28,8 @@ const Profile = () => {
     return (
       <IonPage>
         <main>
-          
+          <h1>{profileData.name} {profileData.surname}</h1>
+          <span>Ist dabei seit dem {new Date(profileData.createdAt).toLocaleDateString()}</span>
         </main>
       </IonPage>
     )

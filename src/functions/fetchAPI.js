@@ -81,7 +81,6 @@ export const fetchAPI = (url, data) => {
     return httpAnswer;
   }
 
-  console.log(getCookie('authToken'));
   fetch("http://localhost:3005/api/" + url, {
     headers: { 
       'Content-Type': 'application/json'
@@ -90,7 +89,6 @@ export const fetchAPI = (url, data) => {
     method: 'POST', 
     body: JSON.stringify(data)
   }).then((res) => {
-    console.log(res);
     httpAnswer.giveRes(res)
   });
 
