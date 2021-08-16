@@ -56,15 +56,25 @@ const ProfileButton = props => {
 
     return () => document.removeEventListener('click', closeMenu);
   }, [props.openProfileMenu]);
+  
+  if(cookies.authToken) {
+    return (
+        <ProfileButtonIcon setOpenProfileMenu={props.setOpenProfileMenu} />
+    )
+  }else {
+    return (
+      <Link to={"./Login"}>
+        <ProfileButtonIcon setOpenProfileMenu={false} />
+      </Link>
+    )
+  }
+}
 
-  return(
-    <>
-    <Link to={!cookies.authToken ? "./Login" : ""}>
-      <IonButton onClick={cookies.authToken ? () => props.setOpenProfileMenu(!props.openProfileMenu) : null}>
-        <IonIcon color="light" icon={personOutline} />
-      </IonButton>
-    </Link>
-    </>
+const ProfileButtonIcon = props => {
+  return (
+    <IonButton onClick={props.setOpenProfileMenu ? () => props.setOpenProfileMenu(!props.openProfileMenu) : null}>
+      <IonIcon color="light" icon={personOutline} />
+    </IonButton>
   )
 }
 
