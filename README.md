@@ -30,5 +30,5 @@ to build a deployment-ready Webapp.
 - Comment on TV shows
 - Feedback formular (I will add good Ideas)
 
-## Conribute
+## Contribute
 If you like!
